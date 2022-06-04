@@ -1,3 +1,4 @@
+@allsteps
 Feature: Indiser Web Page
 
   @step1
@@ -22,5 +23,15 @@ Feature: Indiser Web Page
     And the user clicks to "See all QA jobs" button
     When the user chooses "Istanbul, Turkey" filter by Location
     Then the user should be able to see presence of "Quality Assurance" jobs list
-  When the user clicks "Software Quality Assurance Analyst" Apply Now button
-  Then the user should be see "Software Quality Assurance Analyst" application page
+  Then the user clicks "Software Quality Assurance Analyst" Apply Now button and see application page
+
+  ## Scenario Outline: Different user types
+  #    Given the user logged in as "<userType>"
+  #
+  #    Examples:
+  #      | userType      |
+  #      | driver        |
+  #      | admin         |
+
+
+

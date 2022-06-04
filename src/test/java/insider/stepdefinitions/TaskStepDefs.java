@@ -20,12 +20,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskStepDefs {
 
     InsiderPage insiderPage = new InsiderPage();
     CareersPage careersPage = new CareersPage();
+
 
     @Given("the user enters the web page")
     public void the_user_enters_the_web_page() {
@@ -159,28 +161,74 @@ public class TaskStepDefs {
     }
 
 
-    @When("the user clicks {string} Apply Now button")
-    public void the_user_clicks_Apply_Now_button(String string) {
+    @Then("the user clicks {string} Apply Now button and see application page")
+    public void the_user_clicks_Apply_Now_button_and_see_application_page(String string) {
 
         Actions actions = new Actions(Driver.get());
         actions.moveToElement(careersPage.QAAnalyst);
         BrowserUtils.waitFor(3);
 
+        JavascriptExecutor jse = (JavascriptExecutor) Driver.get();
 
+        for (int i = 0; i < 5; i++) {
+            BrowserUtils.waitFor(2);
+            jse.executeScript("window.scrollBy(0,100)");
+
+        }
+
+
+
+//Creating object of an Actions class
+        Actions action = new Actions(Driver.get());
+
+        String parentWindow = Driver.get().getWindowHandle();
+
+
+//Performing the mouse hover action on the target element.
+        actions.moveToElement(careersPage.ApplyButton).perform();
         careersPage.ApplyButton.click();
-        BrowserUtils.waitFor(4);
+
+        BrowserUtils.waitFor(5);
+
+        for (String childTab : Driver.get().getWindowHandles()) {
+
+            Driver.get().switchTo().window(childTab);
+
+        }
+
+        BrowserUtils.waitFor(3);
+
+        System.out.println(Driver.get().getTitle());
+        String expectedResult = "Insider. - Software Quality Assurance Analyst";
+        Assert.assertEquals(expectedResult, Driver.get().getTitle());
+
+
+       //ArrayList<String> tabs2 = new ArrayList<String> (Driver.get().getWindowHandles());
+       // Driver.get().switchTo().window(tabs2.get(0));
+       // Driver.get().close();
+       // Driver.get().switchTo().window(Driver.get().);
+
+
+
+
+
 
 
     }
 
-    @Then("the user should be see {string} application page")
-    public void the_user_should_be_see_application_page(String expectedPageTitle) {
-        expectedPageTitle = "Insider. - " + expectedPageTitle;
+  //  @Then("the user should be see {string} application page")
+   // public void the_user_should_be_see_application_page(String expectedPageTitle) {
+    //    expectedPageTitle = "Insider. - " + expectedPageTitle;
 
-      Assert.assertEquals(expectedPageTitle, Driver.get().getTitle());
 
-    }
 
+    //}
+
+
+// browser.getAllWindowHandles().then(function (handles) { browser.driver.switchTo().window(handles[1]);
+//browser.driver.close();
+//browser.driver.switchTo().window(handles[0]);
+//}
 
 
 
