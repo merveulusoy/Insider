@@ -203,33 +203,9 @@ public class TaskStepDefs {
         Assert.assertEquals(expectedResult, Driver.get().getTitle());
 
 
-       //ArrayList<String> tabs2 = new ArrayList<String> (Driver.get().getWindowHandles());
-       // Driver.get().switchTo().window(tabs2.get(0));
-       // Driver.get().close();
-       // Driver.get().switchTo().window(Driver.get().);
-
-
-
-
-
 
 
     }
-
-  //  @Then("the user should be see {string} application page")
-   // public void the_user_should_be_see_application_page(String expectedPageTitle) {
-    //    expectedPageTitle = "Insider. - " + expectedPageTitle;
-
-
-
-    //}
-
-
-// browser.getAllWindowHandles().then(function (handles) { browser.driver.switchTo().window(handles[1]);
-//browser.driver.close();
-//browser.driver.switchTo().window(handles[0]);
-//}
-
 
 
 
